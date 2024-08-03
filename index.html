@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
-    <title>Audiowave Analyzer</title>
+    <title>Web Audiowave Analyzer</title>
 </head>
 <body>
     <!-- 
@@ -13,7 +13,10 @@
             - Create the audio wave based on the audio
     -->
     <!-- Audio Source -->
-    <input type="file" accept="audio/*">
+    <div class="inputCont">
+        Upload Audio
+        <input type="file" accept="audio/*">
+    </div>
     <audio></audio>
     <canvas></canvas>
     <script src="script.js"></script>

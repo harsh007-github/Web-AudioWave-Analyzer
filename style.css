@@ -1,4 +1,31 @@
 * {
+    box-sizing: border-box;
     margin: 0;
     padding: 0;
+}
+body {
+    overflow: hidden;
+    background-color: beige;
+}
+.inputCont {
+    height: 3rem;
+    width: 10rem;
+    position: absolute;
+    top: 3rem;
+    left: calc((100% - 10rem)/2);
+    background-color: blueviolet;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 2rem;
+}
+input {
+    opacity: 0;
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
 }

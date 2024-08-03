@@ -19,7 +19,6 @@ input.addEventListener("input", (e) => {
 
   //audio source node
   const audioSource = audioContext.createMediaElementSource(audioElem);
-
   //Analyser
   const analyser = audioContext.createAnalyser();
   audioSource.connect(analyser);
@@ -33,23 +32,32 @@ input.addEventListener("input", (e) => {
 
   const soundBarWidth = canvas.width / bufferDataLength; // Width of eachsound bar
   //Main part where soundbars are created and animated
+  let x = 0;
   function drawAndAnimateSoundBars() {
-    let x = 0;
+    x = 0;
+    //Clearing canvas
     context.clearRect(0, 0, canvas.width, canvas.height);
+
     analyser.getByteFrequencyData(bufferDataArray);
     bufferDataArray.forEach((dataPoint) => {
       const soundBarHeight = dataPoint;
-      context.fillStyle = "red";
+      const baseDarkValue = 30; // Darker base value
+      const scaleFactor = 3; // Higher scale factor to keep values lower
+      const red = ((soundBarHeight * 2) % 100) / scaleFactor + baseDarkValue;
+      const green = ((soundBarHeight * 5) % 120) / scaleFactor + baseDarkValue;
+      const blue = ((soundBarHeight * 7) % 180) / scaleFactor + baseDarkValue;
+
+
+      context.fillStyle = `rgb(${red}, ${green}, ${blue})`;
       context.fillRect(
         x,
         canvas.height - soundBarHeight,
         soundBarWidth,
-        soundBarWidth
+        soundBarHeight
       );
       x += soundBarWidth;
     });
+    if(!audioElem.ended) requestAnimationFrame(drawAndAnimateSoundBars);
   }
-  setInterval(() => {
     drawAndAnimateSoundBars();
-  }, 500);
 });
